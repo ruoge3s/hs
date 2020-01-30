@@ -27,4 +27,4 @@ php bin/hyperf.php db:seed --path=/seeders/init.php
 ```bash
 php watch
 ```
-> 检测当前目录PHP文件是否发生变化，进而进行充气
+> 检测当前目录PHP文件是否发生变化，进而进行重启
