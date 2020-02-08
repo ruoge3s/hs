@@ -1,18 +1,24 @@
 FROM hyperf/hyperf:7.4-alpine-v3.9-cli
 LABEL maintainer="ruoge3s@qq.com" version="1.2" license="MIT"
 
-# ---------- env settings ----------
+# ---------- 编译时所用参数 ----------
+# 默认 Asia/Shanghai
 ARG timezone
+# 默认 prod
+ARG appenv
+# 默认 1.9.2
+ARG composer
 
-# 定义环境变量，预发布环境prev 线上环境prod
+# 定义环境变量
 ENV TIMEZONE=${timezone:-"Asia/Shanghai"} \
-    COMPOSER_VERSION=1.9.1 \
-    APP_ENV=prod
+    COMPOSER_VERSION=${composer:-"1.9.2"} \
+    APP_ENV=${appenv:-"prod"}
 
 COPY ./ /opt/www
 
 # update
 RUN set -ex \
+    && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
     && apk update \
     # install composer
     && cd /tmp \

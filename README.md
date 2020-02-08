@@ -3,6 +3,13 @@
 ## 环境构建
 
 ```bash
+docker build \
+--build-arg appenv=local \
+--build-arg composer=1.9.3 \
+-t hs:1.0 .
+```
+
+```bash
 docker run -it \
     -v $(pwd):/opt/www \
     -p 9501:9501 \
