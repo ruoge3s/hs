@@ -1,0 +1,46 @@
+<svg
+        width="600"
+        height="600"
+        xmlns="http://www.w3.org/2000/svg"
+>
+    <rect
+            x="90"
+            y="90"
+            width="210"
+            height="210"
+            style="fill:rgb(234, 67, 53);"
+            transform="rotate(45, 300, 300)"
+    />
+    <rect
+            x="300"
+            y="90"
+            width="210"
+            height="210"
+            style="fill:rgb(251, 188, 5);"
+            transform="rotate(45, 300, 300)"
+    />
+    <rect
+            x="90"
+            y="300"
+            width="210"
+            height="210"
+            style="fill:rgb(66, 153, 244);"
+            transform="rotate(45, 300, 300)"
+    />
+    <rect
+            x="300"
+            y="300"
+            width="210"
+            height="210"
+            style="fill:rgb(52, 168, 83);"
+            transform="rotate(45, 300, 300)"
+    />
+    <rect
+            x="195"
+            y="300"
+            width="105"
+            height="105"
+            style="fill:white;"
+            transform="rotate(45, 300, 300)"
+    />
+</svg>
