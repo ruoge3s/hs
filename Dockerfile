@@ -22,7 +22,8 @@ RUN set -ex \
     && apk update \
     # install composer
     && cd /tmp \
-    && wget https://github.com/composer/composer/releases/download/${COMPOSER_VERSION}/composer.phar \
+#    && wget https://github.com/composer/composer/releases/download/${COMPOSER_VERSION}/composer.phar \
+    && wget https://getcomposer.org/download/${COMPOSER_VERSION}/composer.phar \
     && chmod u+x composer.phar \
     && mv composer.phar /usr/local/bin/composer \
     # show php version and extensions
