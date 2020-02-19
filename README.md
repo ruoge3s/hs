@@ -9,11 +9,12 @@ docker build \
 -t hs:1.0 .
 ```
 
+## 镜像启动
+
 ```bash
 docker run -it \
     -v $(pwd):/opt/www \
     -p 9501:9501 \
-    -p 9502:9502 \
     --name=hs \
     --entrypoint /bin/sh \
     hs:1.0

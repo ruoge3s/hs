@@ -4,28 +4,36 @@ declare(strict_types=1);
 namespace App\Controller\Study;
 
 use App\Controller\AbstractController;
+use App\JsonRpc\DemoServiceInterface;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\GetMapping;
 
 
 /**
- * Class AopController
+ * Class RpcController
  * @Controller(prefix="/study")
  * @package App\Controller\Study
  */
-class AopController extends AbstractController
+class RpcController extends AbstractController
 {
+
+    /**
+     * @var DemoServiceInterface
+     */
+    protected $demoService;
+
     public function moduleName(): string
     {
         return 'study';
     }
 
     /**
-     * @GetMapping(path="aop", methods="get")
+     * @GetMapping(path="json/rpc", methods="get")
      */
     public function demo()
     {
-        return $this->message(200, [], 'success');
+        $data = $this->demoService->lists(1, 'ql', 'test');
+        return $this->message(200, $data, 'success');
     }
 
 

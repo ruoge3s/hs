@@ -41,7 +41,10 @@
         "hyperf/async-queue": "~1.1.0",
         "hyperf/model-cache": "~1.1.0",
         "hyperf/validation": "^1.1",
-        "ruoge3s/permission": "~1.0.0"
+        "ruoge3s/permission": "~1.0.0",
+        "hyperf/json-rpc": "^1.1",
+        "hyperf/rpc-server": "^1.1",
+        "hyperf/rpc-client": "^1.1"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",
