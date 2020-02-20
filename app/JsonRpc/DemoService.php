@@ -4,10 +4,11 @@ declare(strict_types=1);
 namespace App\JsonRpc;
 
 use Hyperf\RpcServer\Annotation\RpcService;
+use Silk\Contract\DemoServiceInterface;
 
 /**
  * Class DemoService
- * @RpcService(name="DemoService", protocol="jsonrpc-http", server="jsonrpc-http-test")
+ * @RpcService(name="DemoService", protocol="jsonrpc", server="jsonrpc-test")
  * @package App\JsonRpc
  */
 class DemoService implements DemoServiceInterface
@@ -21,10 +22,8 @@ class DemoService implements DemoServiceInterface
                 'channel'   => $channel,
             ],
             'data' => [
-                ['name', 'sex', 'age', 'remark'],
-                ['name', 'sex', 'age', 'remark'],
-                ['name', 'sex', 'age', 'remark'],
-                ['name', 'sex', 'age', 'remark'],
+                ['name', 'sex', 'age', 'remark', date('Y-m-d H:i:s')],
+                ['name', 'sex', 'age', 'remark', date('Y-m-d H:i:s')],
             ]
         ];
     }

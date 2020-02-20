@@ -4,7 +4,8 @@ declare(strict_types=1);
 namespace App\Controller\Study;
 
 use App\Controller\AbstractController;
-use App\JsonRpc\DemoServiceInterface;
+use Silk\Contract\DemoServiceInterface;
+use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\GetMapping;
 
@@ -18,6 +19,7 @@ class RpcController extends AbstractController
 {
 
     /**
+     * @Inject()
      * @var DemoServiceInterface
      */
     protected $demoService;
