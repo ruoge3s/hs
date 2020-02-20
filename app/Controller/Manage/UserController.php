@@ -82,7 +82,7 @@ class UserController extends CommonController
     public function info()
     {
         $info = $this->admin()->toArray();
-        $info['avatar'] = env('APP_URL') . '/header.png';
+        $info['avatar'] = env('APP_URL') . '/assets/header.png';
         return $this->success($info);
     }
 
