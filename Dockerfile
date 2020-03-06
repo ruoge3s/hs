@@ -49,6 +49,4 @@ WORKDIR /opt/www
 
 RUN composer install -vvv --no-dev -o && composer clear-cache
 
-EXPOSE 9505 9506
-
-ENTRYPOINT ["php", "/opt/www/bin/hyperf.php", "start"]
+ENTRYPOINT ["/opt/www/run"]
