@@ -14,6 +14,7 @@ namespace App\Controller;
 
 use App\Constants\ErrorCode;
 use App\Helper\Str;
+use App\Model\UploadLog;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
 use Hyperf\Database\Model\Builder;
 use Hyperf\Di\Annotation\Inject;
@@ -71,13 +72,13 @@ abstract class AbstractController
 
     /**
      * 分页数据每页返回的数据数量，默认10条
-     * @param int $default
+     * @param int $max
      * @return int
      */
-    public function limit($default=100)
+    public function limit($max=100)
     {
         $size = (int)$this->request->query('limit', 10);
-        return $size <= $default ? $size : $default;
+        return $size <= $max ? $size : $max;
     }
 
     /**
@@ -125,7 +126,7 @@ abstract class AbstractController
      * @param string $name
      * @param string $moduleName
      * @param bool $public
-     * @return string
+     * @return UploadLog|null
      */
     protected function fileHandler(string $name, string $moduleName, bool $public=true)
     {
@@ -139,9 +140,9 @@ abstract class AbstractController
         $file->moveTo($targetPath);
         if ($file->isMoved()) {
             chmod($targetPath, 0777);
-            return $home . '/' . $filename;
+            return UploadLog::record($home . '/' . $filename, $this->request->file($name)->getExtension(), $moduleName, $public);
         } else {
-            return '';
+            return null;
         }
     }
 
@@ -159,9 +160,9 @@ abstract class AbstractController
     /**
      * 专门处理图片文件
      * @param string $name
-     * @param bool   $public
+     * @param bool $public
      * @param string $suffix
-     * @return string
+     * @return UploadLog|null
      */
     protected function uploadImagesHandler(string $name, bool $public=true, string $suffix = '')
     {
@@ -172,9 +173,9 @@ abstract class AbstractController
     /**
      * 专门处理其他类型的文件
      * @param string $name
-     * @param bool   $public
+     * @param bool $public
      * @param string $suffix
-     * @return string
+     * @return UploadLog|null
      */
     protected function uploadFileHandler(string $name, bool $public=true, string $suffix = '')
     {
