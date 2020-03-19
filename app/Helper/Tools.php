@@ -16,7 +16,7 @@ class Tools
      */
     public static function isProdEnv()
     {
-        return env('APP_ENV') == 'prod';
+        return config('APP_ENV') == 'prod';
     }
 
     /**
@@ -25,7 +25,7 @@ class Tools
      */
     public static function noProdEnv()
     {
-        return env('APP_ENV') != 'prod';
+        return config('APP_ENV') != 'prod';
     }
 
     /**
