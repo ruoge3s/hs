@@ -17,6 +17,7 @@ return [
         'http' => [
             // 定义异常处理
             Handler\ValidationExceptionHandler::class,
+            Handler\ModelNotFoundExceptionHandler::class,
             Handler\InvalidArgumentExceptionHandler::class,
             Handler\AppExceptionHandler::class,
         ],
