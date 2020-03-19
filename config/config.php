@@ -15,7 +15,12 @@ use Psr\Log\LogLevel;
 
 return [
     'app_name'  => env('APP_NAME', 'skeleton'),
-    'app_env'   => env('APP_ENV', 'local'),
+    // app基本配置
+    'app'       => [
+        'env'       => env('APP_ENV', 'local'),
+        'version'   => env('APP_VERSION', 'v1.0'),
+        'url'       => env('APP_URL', 'http://localhost'),
+    ],
     StdoutLoggerInterface::class => [
         'log_level' => [
             LogLevel::ALERT,

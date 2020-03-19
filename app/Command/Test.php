@@ -34,6 +34,6 @@ class Test extends HyperfCommand
     public function handle()
     {
         // TODO 测试相关的代码，测试完毕后删除
-        $this->line('环境:' . env('APP_ENV', 'local'), 'info');
+        $this->line('环境:' . config('app.env', 'local'), 'info');
     }
 }
