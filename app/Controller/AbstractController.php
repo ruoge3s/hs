@@ -15,6 +15,7 @@ namespace App\Controller;
 use App\Constants\ErrorCode;
 use App\Helper\Str;
 use Hyperf\Contract\LengthAwarePaginatorInterface;
+use Hyperf\Database\Model\Builder;
 use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
@@ -56,6 +57,16 @@ abstract class AbstractController
                 'total' => $paginate->total(),
             ],
         ];
+    }
+
+    /**
+     * 更简便的分页数据响应
+     * @param Builder $builder
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function simpleResponse(Builder $builder)
+    {
+        return $this->success($this->paginate($builder->paginate($this->limit())));
     }
 
     /**
