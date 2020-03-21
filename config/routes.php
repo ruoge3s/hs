@@ -16,7 +16,7 @@ use App\Middleware\AdminPermissionMiddleware;
 use App\Middleware\AdminAuthMiddleware;
 
 
-Router::get('/', [App\Controller\HomeController::class, 'index']);
+//Router::get('/', [App\Controller\HomeController::class, 'index']);
 
 // 用户登录
 Router::post('/manager/user/login', [Manage\UserController::class, 'login']);

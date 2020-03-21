@@ -13,4 +13,7 @@ declare(strict_types=1);
 return [
     // 重写标准日志输出对象，重写日志到文件中
     \Hyperf\Contract\StdoutLoggerInterface::class => \App\Factory\StdoutLogger::class,
+
+    // 使用链接池模式的jsonRpc
+    \Hyperf\JsonRpc\JsonRpcTransporter::class => \Hyperf\JsonRpc\JsonRpcPoolTransporter::class
 ];

@@ -12,8 +12,12 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Hyperf\HttpServer\Annotation\Controller;
+use Hyperf\HttpServer\Annotation\RequestMapping;
+
 /**
  * Class HomeController
+ * @Controller()
  * @package App\Controller
  */
 class HomeController extends AbstractController
@@ -23,6 +27,10 @@ class HomeController extends AbstractController
         return 'home';
     }
 
+    /**
+     * @RequestMapping(path="/", methods="get,post")
+     * @return \Psr\Http\Message\ResponseInterface
+     */
     public function index()
     {
         return $this->response->raw(json_encode([

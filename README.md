@@ -15,12 +15,14 @@ docker build \
 ```
 > appenv为环境变量，会覆盖.env中的APP_ENV, 同时能被env('APP_ENV')获取到
 
-### 启动容器
+## 镜像启动
+
 ```bash
 docker run -it \
     -v $(pwd):/opt/www \
     -p 9501:9501 \
     --name=hs \
+    --entrypoint /bin/sh \
     hs:1.0
 ```
 
