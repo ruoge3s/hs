@@ -89,17 +89,14 @@ class PermissionController extends CommonController
     public function update(PermissionUpdateRequest $request)
     {
         $request->validateResolved();
-        $params = $request->validated();
-        if ($role = Permission::query()->find($params['id'])) {
-            isset($params['name']) && $role->name = $params['name'];
-            isset($params['describe']) && $role->describe = $params['describe'];
+        $validated = $request->validated();
 
-            // TODO 减少复杂度，不使用事务 后期迭代严谨化时，使用事务
-            PermissionHasGroup::relate((int)$params['id'], (int)$params['gid']);
+        $role = Permission::query()->findOrFail($validated['id']);
 
-            return $role->save() ? $this->success($role->toArray()) : $this->failure(ErrorCode::OPERATE_FAILURE, '保存失败');
-        }
-        return $this->failure(ErrorCode::NOT_FOUND);
+        // TODO 减少复杂度，不使用事务 后期迭代严谨化时，使用事务
+        PermissionHasGroup::relate((int)$validated['id'], (int)$validated['gid']);
+        $role->fillable(['name', 'describe']);
+        return $this->save($role, $validated);
     }
 
     /**
@@ -114,10 +111,8 @@ class PermissionController extends CommonController
         $permission = Permission::findById($id);
         if ($permission) {
             if ($permission->delete()) {
-
                 // TODO 删除相关的无用数据
                 PermissionHasGroup::query()->where('id', '=', $permission->id)->delete();
-
                 return $this->success();
             } else {
                 return $this->message(ErrorCode::OPERATE_FAILURE);

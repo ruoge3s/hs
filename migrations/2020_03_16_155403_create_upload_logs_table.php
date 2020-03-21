@@ -19,7 +19,7 @@ class CreateUploadLogsTable extends Migration
             $table->tinyInteger('existed')->comment('是否存在');
             $table->tinyInteger('public')->comment('是否公开访问0,1');
             $table->timestamps();
-            $table->index('path');
+            $table->unique('path');
         });
     }
 

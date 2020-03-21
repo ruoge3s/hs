@@ -39,7 +39,7 @@ class CommonController extends AbstractController
      * @param array $data
      * @return ResponseInterface
      */
-    protected function save(Model $model, array $data)
+    protected function save(Model $model, array $data=[])
     {
         if ($model->fill($data)->save()) {
             return $this->success($model->toArray());
