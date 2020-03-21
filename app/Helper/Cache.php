@@ -24,8 +24,7 @@ class Cache
     public static function remember(string $name, int $ttl, callable $default=null)
     {
         $cache = ApplicationContext::getContainer()->get(CacheInterface::class);
-        $res = $cache->get($name);
-        if ($res) {
+        if ($res = $cache->get($name)) {
             return Str::unserialize($res);
         } else {
             $data = $default();
