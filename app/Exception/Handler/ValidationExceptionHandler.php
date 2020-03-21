@@ -16,14 +16,13 @@ use App\Constants\ErrorCode;
 use App\Helper\HttpMessageBuilder;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
-use Hyperf\HttpMessage\Stream\SwooleStream;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 use \Hyperf\Validation\ValidationException;
 
 /**
  * Class CustomExceptionHandler
- * 验证器异常处理器
+ * 验证器验证失败handler
  * @package App\Exception\Handler
  */
 class ValidationExceptionHandler extends ExceptionHandler

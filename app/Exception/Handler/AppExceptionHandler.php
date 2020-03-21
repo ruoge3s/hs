@@ -13,20 +13,19 @@ declare(strict_types=1);
 namespace App\Exception\Handler;
 
 use App\Constants\ErrorCode;
-use App\Helper\HttpMessageBuilder;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
+use Hyperf\HttpMessage\Stream\SwooleStream;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
 /**
- * 应用异常处理器
+ * 应用异常处理器,处理所有异常
  * Class AppExceptionHandler
  * @package App\Exception\Handler
  */
 class AppExceptionHandler extends ExceptionHandler
 {
-    use HttpMessageBuilder;
     /**
      * @var StdoutLoggerInterface
      */
@@ -41,7 +40,23 @@ class AppExceptionHandler extends ExceptionHandler
     {
         $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
         $this->logger->error($throwable->getTraceAsString());
-        return $this->message(ErrorCode::SERVER_ERROR, [$throwable->getMessage()], null, $response);
+        if (config('app.env') == 'prod') {
+            $header = ['Content-Type', 'application/json; charset=utf-8'];
+            $content = 'Internal Server Error.';
+        } else {
+            $header = ['Content-Type', 'text/plain; charset=utf-8'];
+            $content = json_encode([
+                'code' => $throwable->getCode(),
+                'file' => $throwable->getFile(),
+                'line' => $throwable->getLine(),
+                'message' => $throwable->getMessage(),
+                'trace' => $throwable->getTrace()
+            ]);
+        }
+        return $response
+            ->withStatus(ErrorCode::SERVER_ERROR)
+            ->withAddedHeader(...$header)
+            ->withBody(new SwooleStream($content));
     }
 
     public function isValid(Throwable $throwable): bool

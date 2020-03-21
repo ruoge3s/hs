@@ -22,7 +22,7 @@ use Throwable;
 
 /**
  * Class CustomExceptionHandler
- * model数据未找到异常处理
+ * model数据未找到异常handler
  * @package App\Exception\Handler
  */
 class ModelNotFoundExceptionHandler extends ExceptionHandler

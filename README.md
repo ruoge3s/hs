@@ -25,6 +25,16 @@ docker run -it \
     --entrypoint /bin/sh \
     hs:1.0
 ```
+docker run -it \
+    --rm \
+    -v $(pwd):/opt/www \
+    -p 9501:9501 \
+    --name=ths \
+    --entrypoint /bin/sh \
+    hs:1.0
+```php
+
+```
 
 > 根据实际情况映射目录及端口
 > 项目docker会自动根据appenv使用不同的启动方式(非prod会自动热重启)

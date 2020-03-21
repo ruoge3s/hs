@@ -23,7 +23,7 @@ use InvalidArgumentException;
 
 /**
  * Class CustomExceptionHandler
- * 验证器异常处理器
+ * 数据验证失败异常handler
  * @package App\Exception\Handler
  */
 class InvalidArgumentExceptionHandler extends ExceptionHandler
