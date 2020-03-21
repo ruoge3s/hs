@@ -5,6 +5,7 @@ namespace App\Helper;
 
 use Hyperf\Utils\ApplicationContext;
 use Psr\SimpleCache\CacheInterface;
+use Psr\SimpleCache\InvalidArgumentException;
 
 /**
  * Class Cache
@@ -18,7 +19,7 @@ class Cache
      * @param int $ttl
      * @param callable|null $default
      * @return mixed
-     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function remember(string $name, int $ttl, callable $default=null)
     {

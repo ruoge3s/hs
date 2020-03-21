@@ -49,9 +49,8 @@ class MenuController extends CommonController
     {
         $request->validateResolved();
         $data = $request->validated();
-        return $this->getThen((int)$data['id'], function (Menu $menu) use ($data) {
-            return $this->save($menu, $data);
-        });
+        $menu = Menu::query()->findOrFail($data['id']);
+        return $this->save($menu, $data);
     }
 
     /**
@@ -62,31 +61,15 @@ class MenuController extends CommonController
      */
     public function delete(int $id)
     {
+        $menu = Menu::query()->findOrFail($id);
         /** @var Menu $menu */
-        return $this->getThen($id, function (Menu $menu){
-            if ($menu->son()->first()) {
-                return $this->failure(ErrorCode::OPERATE_FAILURE,'不能删除带有子级的菜单');
-            } else {
-                RoleHasMenu::query()->where('menu_id', '=', $menu->id)->delete(); // 尝试删除所有的关联信息
-                return $menu->delete()
-                    ? $this->success()
-                    : $this->failure(ErrorCode::OPERATE_FAILURE, '删除失败');
-            }
-        });
-    }
-
-    /**
-     * 获取对应的对象并执行回调
-     * @param int $id
-     * @param $callback
-     * @return ResponseInterface
-     */
-    protected function getThen(int $id, $callback)
-    {
-        $menu = Menu::query()->find($id);
-        if ($menu) {
-            return $callback($menu);
+        if ($menu->son()->first()) {
+            return $this->failure(ErrorCode::OPERATE_FAILURE,'不能删除带有子级的菜单');
+        } else {
+            RoleHasMenu::query()->where('menu_id', '=', $menu->id)->delete(); // 尝试删除所有的关联信息
+            return $menu->delete()
+                ? $this->success()
+                : $this->failure(ErrorCode::OPERATE_FAILURE, '删除失败');
         }
-        return $this->message(ErrorCode::NOT_FOUND);
     }
 }
