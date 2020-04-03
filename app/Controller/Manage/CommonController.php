@@ -37,12 +37,17 @@ class CommonController extends AbstractController
      * 通用创建数据保存功能
      * @param \Hyperf\Database\Model\Model|\Hyperf\Database\Model\Collection|Model $model
      * @param array $data
+     * @param callable $func 保存成功后的回调处理
      * @return ResponseInterface
      */
-    protected function save(Model $model, array $data=[])
+    protected function save(Model $model, array $data, callable $func=null): ResponseInterface
     {
         if ($model->fill($data)->save()) {
-            return $this->success($model->toArray());
+            if (is_callable($func)) {
+                return $func($model);
+            } else {
+                return $this->success($model->toArray());
+            }
         } else {
             return $this->message(ErrorCode::OPERATE_FAILURE);
         }
