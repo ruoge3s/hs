@@ -14,8 +14,6 @@ ENV TIMEZONE=${timezone:-"Asia/Shanghai"} \
     COMPOSER_VERSION=${composer:-"1.9.2"} \
     APP_ENV=${appenv:-"prod"}
 
-COPY ./ /opt/www
-
 # update
 RUN set -ex \
     && sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories \
@@ -46,7 +44,5 @@ RUN set -ex \
     && echo -e "\033[42;37m Build Completed :).\033[0m\n"
 
 WORKDIR /opt/www
-
-RUN composer install -vvv --no-dev -o && composer clear-cache
 
 ENTRYPOINT ["/opt/www/run"]

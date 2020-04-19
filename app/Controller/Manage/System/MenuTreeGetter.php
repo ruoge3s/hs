@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Manage\System;
 
-use App\Helper\Tools;
+use App\Helper\Utils;
 use App\Model\Menu;
 
 /**
@@ -27,8 +27,8 @@ trait MenuTreeGetter
 
         $data = $menu->get(['id', 'pid', 'name', 'describe'])->toArray();
         if ($tree) {
-            $data = Tools::toTree($data);
-            $data = Tools::formatTree($data);
+            $data = Utils::toTree($data);
+            $data = Utils::formatTree($data);
         }
         return $data;
     }

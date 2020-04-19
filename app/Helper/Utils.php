@@ -8,24 +8,16 @@ namespace App\Helper;
  * Class Tools
  * @package App\Help
  */
-class Tools
+class Utils
 {
     /**
-     * 判断是否在生产环境下
+     * 判断是否在某种环境下
+     * @param $currEnv
      * @return bool
      */
-    public static function isProdEnv()
+    public static function env($currEnv)
     {
-        return config('app.env') == 'prod';
-    }
-
-    /**
-     * 判断是不是不在生产环境下
-     * @return bool
-     */
-    public static function noProdEnv()
-    {
-        return config('app.env') != 'prod';
+        return config('app.env') == $currEnv;
     }
 
     /**
