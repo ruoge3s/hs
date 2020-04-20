@@ -10,7 +10,6 @@
 ```bash
 docker build \
 --build-arg appenv=local \
---build-arg composer=1.9.3 \
 -t hs:1.0 .
 ```
 > appenv为环境变量，会覆盖.env中的APP_ENV, 同时能被env('APP_ENV')获取到
@@ -46,9 +45,3 @@ php watch
 ```
 > 检测当前目录PHP文件是否发生变化，进而进行重启
 
-```bash
-docker build \
-    --build-arg appenv=local \
-    --build-arg composer=1.9.3 \
-    -t ruoge3s/has:0.1 .
-```
