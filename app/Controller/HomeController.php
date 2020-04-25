@@ -14,6 +14,10 @@ namespace App\Controller;
 
 use Hyperf\HttpServer\Annotation\Controller;
 use Hyperf\HttpServer\Annotation\RequestMapping;
+use Hyperf\Memory\TableManager;
+use Hyperf\Server\ServerFactory;
+use Hyperf\Utils\ApplicationContext;
+use Swoole\Table;
 
 /**
  * Class HomeController

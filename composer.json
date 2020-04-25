@@ -45,7 +45,8 @@
         "hyperf/json-rpc": "^1.1",
         "hyperf/rpc-server": "^1.1",
         "hyperf/rpc-client": "^1.1",
-        "ruoge3s/silk-interface": "^0.1.0"
+        "ruoge3s/silk-interface": "^0.1.0",
+        "hyperf/websocket-server": "^1.1"
     },
     "require-dev": {
         "swoft/swoole-ide-helper": "^4.2",
