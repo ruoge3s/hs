@@ -9,6 +9,7 @@ use Hyperf\Command\Annotation\Command;
 use Psr\Container\ContainerInterface;
 
 /**
+ * 测试命令
  * @Command
  */
 class Test extends HyperfCommand
@@ -33,7 +34,8 @@ class Test extends HyperfCommand
 
     public function handle()
     {
+        $message = '环境:' . config('app.env', 'local');
         // TODO 测试相关的代码，测试完毕后删除
-        $this->line('环境:' . config('app.env', 'local'), 'info');
+        $this->line($message, 'info');
     }
 }

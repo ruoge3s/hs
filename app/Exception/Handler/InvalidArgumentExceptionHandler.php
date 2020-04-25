@@ -14,9 +14,7 @@ namespace App\Exception\Handler;
 
 use App\Constants\ErrorCode;
 use App\Helper\HttpMessageBuilder;
-use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
-use Hyperf\HttpMessage\Stream\SwooleStream;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 use InvalidArgumentException;
@@ -29,15 +27,6 @@ use InvalidArgumentException;
 class InvalidArgumentExceptionHandler extends ExceptionHandler
 {
     use HttpMessageBuilder;
-    /**
-     * @var StdoutLoggerInterface
-     */
-    protected $logger;
-
-    public function __construct(StdoutLoggerInterface $logger)
-    {
-        $this->logger = $logger;
-    }
 
     /**
      * @param Throwable $throwable
