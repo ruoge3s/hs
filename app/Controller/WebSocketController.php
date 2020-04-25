@@ -47,7 +47,10 @@ class WebSocketController implements OnMessageInterface, OnOpenInterface, OnClos
     {
         // 获取websocket对象
         // TODO 如果启动多个websocket， 如何知道是获取的那个websocket服务对象呢
-        $wsServer = ApplicationContext::getContainer()->get(ServerFactory::class)->getServer()->getServer();
+        $wsServer = ApplicationContext::getContainer()
+            ->get(ServerFactory::class)
+            ->getServer()
+            ->getServer();
 
         // 获取当前要推送的fd
         $fd = 1;
