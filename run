@@ -1,11 +1,4 @@
 #!/usr/bin/env sh
 
-# 在非生产环境下，使用热重启
-if test ${APP_ENV} = 'prod'
-then
-    composer install -vvv --no-dev -o
-    /usr/bin/php /opt/www/bin/hyperf.php start
-else
-    composer install -vvv -o
-    /usr/bin/php /opt/www/watch
-fi
+composer install --no-dev -o && composer clear-cache
+/usr/bin/php /opt/www/bin/hyperf.php start

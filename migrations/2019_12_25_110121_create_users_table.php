@@ -26,17 +26,8 @@ class CreateUsersTable extends Migration
         $builder->insert([
             'username'  => 'administrator',
             'nickname'  => '超级管理员',
-            'email'     => 'admin@hs.com',
-            'password'  => password_hash('demo2020', PASSWORD_BCRYPT),
-            'enable'    => 1,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s'),
-        ]);
-        $builder->insert([
-            'username'  => 'test-admin',
-            'nickname'  => '测试用户',
-            'email'     => 'test@hs.com',
-            'password'  => password_hash('demo2020', PASSWORD_BCRYPT),
+            'email'     => env('ADMIN_EMAIL', 'admin@hs.com'),
+            'password'  => password_hash(env('ADMIN_PASS', 'demo2020'), PASSWORD_BCRYPT),
             'enable'    => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
