@@ -6,7 +6,7 @@ LABEL maintainer="ruoge3s@qq.com" version="1.2" license="MIT"
 ARG timezone
 # 默认 prod
 ARG appenv
-# 默认 1.9.2
+# 默认 1.10.5
 ARG composer
 
 # 定义环境变量
@@ -44,5 +44,7 @@ RUN set -ex \
     && echo -e "\033[42;37m Build Completed :).\033[0m\n"
 
 WORKDIR /opt/www
+
+COPY . /opt/www
 
 ENTRYPOINT ["/opt/www/run"]

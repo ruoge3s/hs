@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace App\Exception\Handler;
 
 use App\Constants\ErrorCode;
+use App\Helper\Utils;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Hyperf\HttpMessage\Stream\SwooleStream;
@@ -38,9 +39,13 @@ class AppExceptionHandler extends ExceptionHandler
 
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
-        $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
-        $this->logger->error($throwable->getTraceAsString());
-        if (config('app.env') == 'prod') {
+        if (Utils::envIs('prod')) {
+            // 线上环境才记录异常
+            $this->logger->error(sprintf('%s[%s] in %s', $throwable->getMessage(), $throwable->getLine(), $throwable->getFile()));
+            $this->logger->error($throwable->getTraceAsString());
+
+            // TODO 标识异常，减少重复写入
+
             $header = ['Content-Type', 'application/json; charset=utf-8'];
             $content = 'Internal Server Error.';
         } else {

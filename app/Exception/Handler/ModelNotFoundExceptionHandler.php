@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace App\Exception\Handler;
 
 use App\Constants\ErrorCode;
+use App\Constants\ModelName;
 use App\Helper\HttpMessageBuilder;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Database\Model\ModelNotFoundException;
@@ -37,7 +38,8 @@ class ModelNotFoundExceptionHandler extends ExceptionHandler
     public function handle(Throwable $throwable, ResponseInterface $response)
     {
         $this->stopPropagation();
-        return $this->message(ErrorCode::NOT_FOUND, null, '找不到对象', $response);
+        $modelName = ModelName::getMessage($throwable->getModel());
+        return $this->message(ErrorCode::NOT_FOUND, null, "找不到[{$modelName}]", $response);
     }
 
     /**

@@ -14,7 +14,6 @@ namespace App\Exception\Handler;
 
 use App\Constants\ErrorCode;
 use App\Helper\HttpMessageBuilder;
-use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\ExceptionHandler\ExceptionHandler;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
@@ -28,15 +27,6 @@ use \Hyperf\Validation\ValidationException;
 class ValidationExceptionHandler extends ExceptionHandler
 {
     use HttpMessageBuilder;
-    /**
-     * @var StdoutLoggerInterface
-     */
-    protected $logger;
-
-    public function __construct(StdoutLoggerInterface $logger)
-    {
-        $this->logger = $logger;
-    }
 
     /**
      * @param Throwable|ValidationException $throwable

@@ -15,7 +15,7 @@ class Utils
      * @param $currEnv
      * @return bool
      */
-    public static function env($currEnv)
+    public static function envIs($currEnv)
     {
         return config('app.env') == $currEnv;
     }
